@@ -10,15 +10,16 @@ import edu.wpi.first.wpilibj.DigitalInput;
  *
  * @author adam
  */
-public class LimitSwitch
+public class LimitSwitch extends DigitalInput
 {
 
-    DigitalInput di;
+//    DigitalInput di;
     boolean reversed = false;
 
     public LimitSwitch( int channel, boolean reversed )
     {
-        di = new DigitalInput( channel );
+//        di = new DigitalInput( channel );
+        super(channel);
         this.reversed = reversed;
     }
 
@@ -26,11 +27,11 @@ public class LimitSwitch
     {
         if ( reversed )
         {
-            return !di.get();
+            return !super.get();
         }
         else
         {
-            return di.get();
+            return super.get();
         }
     }
 }
