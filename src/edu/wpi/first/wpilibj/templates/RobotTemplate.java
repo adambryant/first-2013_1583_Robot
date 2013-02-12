@@ -6,7 +6,8 @@
 /*----------------------------------------------------------------------------*/
 package edu.wpi.first.wpilibj.templates;
 
-import com.rop.control.Control;
+import com.rop.control.ClimbSequence;
+import com.rop.control.ResetSequence;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -19,41 +20,40 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class RobotTemplate extends SimpleRobot
 {
-    Control control;
-
     protected void robotInit()
     {
         super.robotInit();
-
-        control = Control.getInstance();
     }
 
     protected void disabled()
     {
-        super.disabled();
+        
     }
 
-    public void robotMain()
-    {
-        super.robotMain();
-    }
+//    public void robotMain()
+//    {
+//        super.robotMain();
+//    }
 
-    public void startCompetition()
-    {
-        super.startCompetition();
-    }
+//    public void startCompetition()
+//    {
+////        super.startCompetition();
+//    }
 
     /**
      * This function is called once each time the robot enters autonomous mode.
      */
     public void autonomous()
     {
-        while ( isEnabled() )
-        {
-            System.out.println("In isEnabled() in autonomous");
-            Timer.delay( 1.0 );
-        }
-        System.out.println("After isEnabled() while loop in autonomous");
+//        while ( isEnabled() )
+//        {
+//            System.out.println("In isEnabled() in autonomous");
+//            Timer.delay( 1.0 );
+//        }
+//        System.out.println("After isEnabled() while loop in autonomous");
+        ClimbSequence climb = new ClimbSequence();
+
+        climb.doSequence();
     }
 
     /**
@@ -73,14 +73,18 @@ public class RobotTemplate extends SimpleRobot
     {
         //control.testCycle();
 //        control.testToTop();
-        control.reset();
-        Timer.delay( 5.0 );
-        control.testToBottom();
+//        control.reset();
+//        Timer.delay( 5.0 );
+//        control.testToBottom();
         
-        while ( isEnabled() )
-        {
-//            control.testLimitSwitches();
-//            Timer.delay( 0.5 );
-        }
+//        while ( isEnabled() )
+//        {
+////            control.testLimitSwitches();
+////            Timer.delay( 0.5 );
+//        }
+
+        ResetSequence reset = new ResetSequence();
+
+        reset.doSequence();
     }
 }

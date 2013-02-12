@@ -16,6 +16,7 @@ public class RobotBody
 
     private RobotBody()
     {
+        motor = new Servo(2);
     }
 
     public static RobotBody getInstance()
@@ -28,18 +29,23 @@ public class RobotBody
         private static final RobotBody INSTANCE = new RobotBody();
     }
 
-    public void shiftCgFwd( double delaySeconds )
+    public void shiftCgFront()
     {
         motor.set( 0.25 );
     }
 
-    public void shiftCgBack( double delaySeconds )
+    public void shiftCgBack()
     {
         motor.set( 0.75 );
     }
 
-    public void shiftCgCenter( double delaySeconds )
+    public void shiftCgCenter()
     {
         motor.set( 0.50 );
+    }
+
+    public boolean shiftDone()
+    {
+        return true;
     }
 }

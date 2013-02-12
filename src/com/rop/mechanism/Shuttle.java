@@ -15,14 +15,14 @@ import edu.wpi.first.wpilibj.Timer;
 public class Shuttle
 {
     static final double UP_SPEED = 0.25;
-    static final double DOWN_SPEED = -0.3;
-    static final double DOWN_TIME = 2.5;
+    static final double DOWN_SPEED = -0.5;
+    static final double DOWN_TIME = 2.25;
 
     private RopVictor motor;
     private LimitSwitch topLimit;
     private LimitSwitch bottomLimit;
-    private MoveShuttle toTopThread;
-    private MoveShuttle toBottomThread;
+//    private MoveShuttle toTopThread;
+//    private MoveShuttle toBottomThread;
 
     private Shuttle()
     {
@@ -41,95 +41,115 @@ public class Shuttle
         private static final Shuttle INSTANCE = new Shuttle();
     }
 
-    public void toTop()
+    public void down()
     {
-        if ( toTopThread == null ||
-                (toTopThread != null && !toTopThread.isActive()) )
-        {
-            toTopThread = new MoveShuttle( UP_SPEED, topLimit );
-            toTopThread.start();
-        }
-    }
-
-    public void toBottom()
-    {
-        if ( toBottomThread == null ||
-                (toBottomThread != null && !toBottomThread.isActive()) )
-        {
-            toBottomThread = new MoveShuttle( DOWN_SPEED, bottomLimit );
-            toBottomThread.start();
-        }
-    }
-
-    public boolean toTopIsActive()
-    {
-        return toTopThread.isActive();
-    }
-
-    public boolean toBottomIsActive()
-    {
-        return toBottomThread.isActive();
-    }
-
-    // NOTE!! Assumes shuttle is at the top.
-    public void halfwayDown()
-    {
-        Timer timer = new Timer();
         motor.set( DOWN_SPEED );
-        timer.start();
-        while (timer.get() < DOWN_TIME)
-            ;
-        motor.stopMotor();
     }
-
-    public void testLimitSwitches()
+    public void up()
     {
-        System.out.println("Top: " + this.topLimit.get() + "  Bottom: " + this.bottomLimit.get() );
+        motor.set( UP_SPEED );
     }
-
-    protected class MoveShuttle extends Thread
+    public void stop()
     {
-        private double speed;
-        private LimitSwitch limit;
-        private boolean active = false;
-        private boolean cancelled = false;
-
-        public MoveShuttle( double motorSpeed, LimitSwitch limit )
-        {
-            speed = motorSpeed;
-            this.limit = limit;
-        }
-
-        public void run()
-        {
-            active = true;
-
-            motor.set( speed );
-
-            System.out.println("Speed: " + speed + "  Sw: " + limit.get() + "  SW is on: " + limit.getChannel());
-
-            while ( !limit.get() && !cancelled )
-            {
-                System.out.println("Speed: " + speed + "  Sw: " + limit.get());
-
-                Thread.yield();
-            }
-
-            motor.stopMotor();
-
-            active = false;
-        }
-
-        public boolean isActive()
-        {
-            return active;
-        }
-
-        public void setCancelled( boolean cancelled )
-        {
-            this.cancelled = cancelled;
-        }
-
-        
+        motor.set( 0.0 );
     }
+    public boolean getTopLimit()
+    {
+        return topLimit.get();
+    }
+    public boolean getBottomLimit()
+    {
+        return bottomLimit.get();
+    }
+//    public void toTop()
+//    {
+//        if ( toTopThread == null ||
+//                (toTopThread != null && !toTopThread.isActive()) )
+//        {
+//            toTopThread = new MoveShuttle( UP_SPEED, topLimit );
+//            toTopThread.start();
+//        }
+//    }
+//
+//    public void toBottom()
+//    {
+//        if ( toBottomThread == null ||
+//                (toBottomThread != null && !toBottomThread.isActive()) )
+//        {
+//            toBottomThread = new MoveShuttle( DOWN_SPEED, bottomLimit );
+//            toBottomThread.start();
+//        }
+//    }
+//
+//    public boolean toTopIsActive()
+//    {
+//        return toTopThread.isActive();
+//    }
+//
+//    public boolean toBottomIsActive()
+//    {
+//        return toBottomThread.isActive();
+//    }
+//
+//    // NOTE!! Assumes shuttle is at the top.
+//    public void halfwayDown()
+//    {
+//        Timer timer = new Timer();
+//        motor.set( DOWN_SPEED );
+//        timer.start();
+//        while (timer.get() < DOWN_TIME)
+//            ;
+//        motor.stopMotor();
+//    }
+//
+//    public void testLimitSwitches()
+//    {
+//        System.out.println("Top: " + this.topLimit.get() + "  Bottom: " + this.bottomLimit.get() );
+//    }
+//
+//    protected class MoveShuttle extends Thread
+//    {
+//        private double speed;
+//        private LimitSwitch limit;
+//        private boolean active = false;
+//        private boolean cancelled = false;
+//
+//        public MoveShuttle( double motorSpeed, LimitSwitch limit )
+//        {
+//            speed = motorSpeed;
+//            this.limit = limit;
+//        }
+//
+//        public void run()
+//        {
+//            active = true;
+//
+//            motor.set( speed );
+//
+//            System.out.println("Speed: " + speed + "  Sw: " + limit.get() + "  SW is on: " + limit.getChannel());
+//
+//            while ( !limit.get() && !cancelled )
+//            {
+//                System.out.println("Speed: " + speed + "  Sw: " + limit.get());
+//
+//                Thread.yield();
+//            }
+//
+//            motor.stopMotor();
+//
+//            active = false;
+//        }
+//
+//        public boolean isActive()
+//        {
+//            return active;
+//        }
+//
+//        public void setCancelled( boolean cancelled )
+//        {
+//            this.cancelled = cancelled;
+//        }
+//
+//
+//    }
 }

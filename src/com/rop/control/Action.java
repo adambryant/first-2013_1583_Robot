@@ -10,28 +10,29 @@ package com.rop.control;
  */
 public abstract class Action extends Thread
 {
-
-    private boolean active = false;
     private boolean cancelled = false;
 
-    public boolean isActive()
-    {
-        return active;
-    }
-
-    public void cancel()
+    final public void cancel()
     {
         cancelled = true;
     }
 
-    // This should return true normally, false to cause thread to end
-    public abstract boolean doAction();
+    protected abstract void startAction();
 
-    public void run()
+    // This should return false normally, true to cause thread to end
+    protected abstract boolean testComplete();
+
+    protected abstract void stopAction();
+
+    final public void run()
     {
-        while ( doAction() && !cancelled )
+        startAction();
+
+        while ( !testComplete() && !cancelled )
         {
             Thread.yield();
         }
+
+        stopAction();
     }
 }
