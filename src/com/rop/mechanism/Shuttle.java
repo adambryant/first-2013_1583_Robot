@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Shuttle
 {
-    static final double UP_SPEED = 0.25;
-    static final double DOWN_SPEED = -0.5;
-    static final double DOWN_TIME = 2.25;
+    static final double UP_SPEED = -0.4;
+    static final double DOWN_SPEED = 0.5;
+//    static final double DOWN_TIME = 1.0;
 
     private RopVictor motor;
     private LimitSwitch topLimit;
@@ -26,8 +26,8 @@ public class Shuttle
 
     private Shuttle()
     {
-        topLimit = new LimitSwitch( 1, true );
-        bottomLimit = new LimitSwitch( 2, false );
+        topLimit = new LimitSwitch( 2, false );
+        bottomLimit = new LimitSwitch( 1, true );
         motor = new RopVictor( 1, true );
     }
 

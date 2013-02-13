@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.Timer;
  *
  * @author robotics
  */
-public class ShuttleToHalfwayAction extends Action
+public class ShuttleTo30PointAction extends Action
 {
-    private final static double DELAY_TIME = 3.6;
+    private final static double DELAY_TIME = 8.5;
     Shuttle shuttle;
     Timer timer;
 

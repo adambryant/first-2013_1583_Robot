@@ -4,17 +4,15 @@
  */
 package com.rop.control;
 
-import com.rop.mechanism.RobotBody;
-
 /**
- * Step 3 - Shuttle to top
+ * Step 3 - Shift CG to put arm against inside of rung 2
  *
  * @author robotics
  */
-public class ClimbStep4 extends Step
+public class ClimbStep7 extends Step
 {
     protected void stepInit()
     {
-        actions.addElement( new ShiftCGAction(RobotBody.CG_HALF_FORWARD, 0.0 ) );
+        actions.addElement( new ShuttleTo30PointAction() );
     }
 }

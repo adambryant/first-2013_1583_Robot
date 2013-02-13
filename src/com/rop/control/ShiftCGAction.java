@@ -11,16 +11,18 @@ import edu.wpi.first.wpilibj.Timer;
  *
  * @author robotics
  */
-public class ShiftCGBackAction extends Action
+public class ShiftCGAction extends Action
 {
     private double delay = 0.0;
-    Timer timer;
-    int state = 0;
-    RobotBody body;
+    private double value = 0.5;
+    private Timer timer;
+    private int state = 0;
+    private RobotBody body;
 
-    public ShiftCGBackAction( double delay )
+    public ShiftCGAction( double value, double delay )
     {
         this.delay = delay;
+        this.value = value;
     }
 
     protected void startAction()
@@ -40,7 +42,7 @@ public class ShiftCGBackAction extends Action
                 break;
 
             case 1:
-                body.shiftCgBack();
+                body.shiftCg(value);
                 state++;
                 break;
 

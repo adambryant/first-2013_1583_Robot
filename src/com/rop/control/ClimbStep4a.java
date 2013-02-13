@@ -11,10 +11,10 @@ import com.rop.mechanism.RobotBody;
  *
  * @author robotics
  */
-public class ClimbStep4 extends Step
+public class ClimbStep4a extends Step
 {
     protected void stepInit()
     {
-        actions.addElement( new ShiftCGAction(RobotBody.CG_HALF_FORWARD, 0.0 ) );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_HALF_FORWARD, 3.0 ) );
     }
 }

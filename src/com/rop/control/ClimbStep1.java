@@ -4,6 +4,8 @@
  */
 package com.rop.control;
 
+import com.rop.mechanism.RobotBody;
+
 /**
  * Step 1 - Start initial climb
  * 
@@ -15,6 +17,8 @@ public class ClimbStep1 extends Step
     {
 //        actions.addElement( new ShiftCGCenterAction(0.0) );
         actions.addElement( new ShuttleToBottomAction() );
-        actions.addElement( new ShiftCGFrontAction(2.0) );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_BACK, 1.0) );
+//        actions.addElement( new ShiftCGHalfBackAction(4.0) );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_CENTER, 4.0) );
     }
 }

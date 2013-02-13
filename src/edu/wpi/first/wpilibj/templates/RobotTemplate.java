@@ -8,6 +8,8 @@ package edu.wpi.first.wpilibj.templates;
 
 import com.rop.control.ClimbSequence;
 import com.rop.control.ResetSequence;
+import com.rop.control.TestSequence;
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -20,9 +22,13 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class RobotTemplate extends SimpleRobot
 {
+//    AnalogChannel accIn;
+
     protected void robotInit()
     {
         super.robotInit();
+
+//        accIn = new AnalogChannel(7);
     }
 
     protected void disabled()
@@ -71,20 +77,17 @@ public class RobotTemplate extends SimpleRobot
      */
     public void test()
     {
-        //control.testCycle();
-//        control.testToTop();
-//        control.reset();
-//        Timer.delay( 5.0 );
-//        control.testToBottom();
         
 //        while ( isEnabled() )
 //        {
-////            control.testLimitSwitches();
-////            Timer.delay( 0.5 );
+//            System.out.println("Value: " + accIn.getValue() + "   Voltage: " + accIn.getVoltage());
+//            Timer.delay( 0.5 );
 //        }
 
-        ResetSequence reset = new ResetSequence();
+//        ResetSequence reset = new ResetSequence();
+//        reset.doSequence();
 
-        reset.doSequence();
+        TestSequence test = new TestSequence();
+        test.doSequence();
     }
 }

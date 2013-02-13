@@ -7,14 +7,15 @@ package com.rop.control;
 import com.rop.mechanism.RobotBody;
 
 /**
- * Step 3 - Shuttle to top
+ * Finish climb started in autonomous
  *
  * @author robotics
  */
-public class ClimbStep4 extends Step
+public class ClimbStep5 extends Step
 {
     protected void stepInit()
     {
-        actions.addElement( new ShiftCGAction(RobotBody.CG_HALF_FORWARD, 0.0 ) );
+        actions.addElement( new ShuttleToBottomAction() );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_FORWARD, 1.0) );
     }
 }
