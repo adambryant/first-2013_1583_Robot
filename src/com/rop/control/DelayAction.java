@@ -11,18 +11,18 @@ import edu.wpi.first.wpilibj.Timer;
  *
  * @author robotics
  */
-public class ShuttleTo30PointAction extends Action
+public class DelayAction extends Action
 {
-    private final static double DELAY_TIME = 5.5;
-    Shuttle shuttle;
+    private double DELAY_TIME = 1.0;
     Timer timer;
+
+    public DelayAction(double delayTime)
+    {
+        DELAY_TIME = delayTime;
+    }
 
     protected void startAction()
     {
-        shuttle = Shuttle.getInstance();
-
-        shuttle.down();
-
         timer = new Timer();
         timer.start();
     }
@@ -34,7 +34,6 @@ public class ShuttleTo30PointAction extends Action
 
     protected void stopAction()
     {
-        shuttle.stop();
     }
 
 }

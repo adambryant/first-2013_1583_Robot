@@ -16,6 +16,8 @@ public class ClimbStep5 extends Step
     protected void stepInit()
     {
         actions.addElement( new ShuttleToBottomAction() );
-        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_FORWARD, 1.0) );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_FORWARD, 5.0) );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_FORWARD, 6.0) );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_FORWARD, 7.0) );
     }
 }

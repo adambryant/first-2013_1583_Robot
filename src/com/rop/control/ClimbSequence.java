@@ -17,9 +17,11 @@ public class ClimbSequence extends Sequence
         steps.addElement( new ClimbStep3() );
         steps.addElement( new ClimbStep4() );
         steps.addElement( new ClimbStep4a() );
+        steps.addElement( new ClimbStep4b() );
         steps.addElement( new ClimbStep5() );
         steps.addElement( new ClimbStep5a() );
         steps.addElement( new ClimbStep6() );
+        steps.addElement( new ClimbStep6a() );
         steps.addElement( new ClimbStep7() );
     }
 }

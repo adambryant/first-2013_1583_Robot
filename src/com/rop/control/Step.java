@@ -51,12 +51,12 @@ public abstract class Step
 
         for ( int i = 0; i < actions.size(); i++ )
         {
-            System.out.println("Checking action: " + i);
+//            System.out.println("Checking action: " + i);
 
             Action act = (Action)actions.elementAt( i );
             if (act.isAlive())
             {
-                System.out.println("Action " + i + " is NOT done");
+//                System.out.println("Action " + i + " is NOT done");
                 
                 done = false;
             }

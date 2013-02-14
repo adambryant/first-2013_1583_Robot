@@ -5,8 +5,7 @@
 package com.rop.mechanism;
 
 import com.rop.outputs.motor.RopCRServo;
-import edu.wpi.first.wpilibj.AnalogChannel;
-import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Servo;
 
 /**
@@ -15,36 +14,22 @@ import edu.wpi.first.wpilibj.Servo;
  */
 public class RobotBody
 {
-    public static final double CG_FULL_BACK     = 455;
-    public static final double CG_HALF_BACK     = 477;
-    public static final double CG_CENTER        = 500;
-    public static final double CG_HALF_FORWARD  = 522;
-    public static final double CG_FULL_FORWARD  = 555;
-//    public static final double CG_FULL_BACK     = 0.0;
-//    public static final double CG_HALF_BACK     = 0.25;
-//    public static final double CG_CENTER        = 0.50;
-//    public static final double CG_HALF_FORWARD  = 0.75;
-//    public static final double CG_FULL_FORWARD  = 1.0;
+    public static final double CG_FULL_BACK     = 75.0;
+    public static final double CG_HALF_BACK     = 37;
+    public static final double CG_CENTER        = 0;
+    public static final double CG_HALF_FORWARD  = -37;
+    public static final double CG_FULL_FORWARD  = -75;
 
-//    public static final int ACC_FULL_BACK     = 455;
-//    public static final int ACC_HALF_BACK     = 477;
-//    public static final int ACC_CENTER        = 500;
-//    public static final int ACC_HALF_FORWARD  = 522;
-//    public static final int ACC_FULL_FORWARD  = 555;
-
-    public static final double K_P = 0.1;
-    public static final double K_I = 0.0; //0.05;
-    public static final double K_D = 0.0; //0.2;
-
-    private AnalogChannel accIn = null;
-    private RopCRServo motor;
-
-    private PIDController cgController;
+    private double setPoint = 0.0;
+    private Gyro gyro;
+//    private RopCRServo motor;
+    private Servo motor;
 
     private RobotBody()
     {
-        motor = new RopCRServo(2, false);
-        accIn = new AnalogChannel(7);
+//        motor = new RopCRServo(2, false);
+        motor = new Servo(2);
+        gyro = new Gyro(2);
     }
 
     public static RobotBody getInstance()
@@ -60,23 +45,45 @@ public class RobotBody
     public void shiftCg( double value )
     {
         System.out.println("In shiftCg()");
-//        motor.set( value );
-        cgController = new PIDController(K_P, K_I, K_D, accIn, motor);
-        cgController.enable();
-        cgController.setSetpoint( value );
-        cgController.setPercentTolerance( 20.0 );
+        setPoint = value;
     }
 
     public boolean shiftDone()
     {
-        System.out.println("In shiftDone()");
-        if (cgController.onTarget())
+        double angle = gyro.getAngle();
+
+        System.out.println("angle: " + angle + "  setPoint: " + setPoint);
+
+        if ( Math.abs( angle - setPoint) < 5 )
         {
-            cgController.disable();
-            cgController.free();
+            motor.set( 0.50 );
             return true;
         }
-        else
-            return false;
+
+        if (angle < setPoint)
+            motor.set( 0.15 );
+        else if ( angle > setPoint )
+            motor.set( 0.65 );
+
+        return false;
+    }
+
+    public double getGyroAngle()
+    {
+        return gyro.getAngle();
+    }
+    
+    public void setSpeed( double speed )
+    {
+        // Incoming value is -1.0 to 1.0.  Need to translate it for a servo
+        double incoming = speed + 1.0;
+        double motorSpeed = incoming / 2.0;
+//        double motorSpeed = percent * 1.0;
+
+        System.out.println("speed: " + speed + "  incoming: " + incoming + "  motorSpeed: " + motorSpeed);
+
+
+        // Check gyro to prevent overdriving!!!!
+        motor.set( motorSpeed );
     }
 }

@@ -7,11 +7,10 @@
 package edu.wpi.first.wpilibj.templates;
 
 import com.rop.control.ClimbSequence;
-import com.rop.control.ResetSequence;
-import com.rop.control.TestSequence;
-import edu.wpi.first.wpilibj.AnalogChannel;
+import com.rop.inputs.Driver;
+import com.rop.mechanism.RobotBody;
+import com.rop.mechanism.Shuttle;
 import edu.wpi.first.wpilibj.SimpleRobot;
-import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,13 +21,17 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class RobotTemplate extends SimpleRobot
 {
-//    AnalogChannel accIn;
+    RobotBody body;
+    Shuttle shuttle;
+    Driver driver;
 
     protected void robotInit()
     {
         super.robotInit();
 
-//        accIn = new AnalogChannel(7);
+        body = RobotBody.getInstance();
+        shuttle = Shuttle.getInstance();
+        driver = Driver.getInstance();
     }
 
     protected void disabled()
@@ -69,6 +72,8 @@ public class RobotTemplate extends SimpleRobot
     {
         while ( isEnabled() )
         {
+            shuttle.setSpeed( driver.getY() );
+            body.setSpeed( driver.getRot() );
         }
     }
 
@@ -78,16 +83,26 @@ public class RobotTemplate extends SimpleRobot
     public void test()
     {
         
-//        while ( isEnabled() )
-//        {
-//            System.out.println("Value: " + accIn.getValue() + "   Voltage: " + accIn.getVoltage());
-//            Timer.delay( 0.5 );
-//        }
+        while ( isEnabled() )
+        {
+//            System.out.println("Value: " + accIn.getAcceleration());
+//            System.out.println("Value: " + body.getGyroAngle());
+//            System.out.println("y: " + driver.getY() + "  rot: " + driver.getRot());
+            long y = (long)(driver.getY() * 1000.0);
+            long rot = (long)(driver.getRot() * 1000.0);
+            System.out.println("y: " + y + "  rot: " + rot);
+//            driver.getRawAxis();
+        }
 
 //        ResetSequence reset = new ResetSequence();
 //        reset.doSequence();
 
-        TestSequence test = new TestSequence();
-        test.doSequence();
+//        TestSequence test = new TestSequence();
+//        test.doSequence();
+//
+//        Timer.delay( 10.0 );
+//
+//        test = new TestSequence();
+//        test.doSequence();
     }
 }

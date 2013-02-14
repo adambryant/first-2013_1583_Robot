@@ -9,10 +9,11 @@ package com.rop.control;
  *
  * @author robotics
  */
-public class ClimbStep4a extends Step
+public class ClimbStep4b extends Step
 {
     protected void stepInit()
     {
-        actions.addElement( new DelayAction( 1.5 ) );
+        actions.addElement( new ShuttleToBottomXSecsAction( 3.0 ) );
+        actions.addElement( new DelayAction( 12.0 ) );
     }
 }

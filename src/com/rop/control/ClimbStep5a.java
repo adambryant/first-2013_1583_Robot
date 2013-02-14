@@ -4,6 +4,8 @@
  */
 package com.rop.control;
 
+import com.rop.mechanism.RobotBody;
+
 /**
  * Step 3 - Shift CG to put arm against inside of rung 2
  *
@@ -14,5 +16,10 @@ public class ClimbStep5a extends Step
     protected void stepInit()
     {
         actions.addElement( new ShuttleToTopAction() );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_FORWARD, 6.0) );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_FORWARD, 7.0) );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_FORWARD, 8.0) );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_FORWARD, 9.0) );
+        actions.addElement( new ShiftCGAction(RobotBody.CG_FULL_FORWARD, 10.0) );
     }
 }
