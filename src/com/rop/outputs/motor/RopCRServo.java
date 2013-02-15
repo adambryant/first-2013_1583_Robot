@@ -13,23 +13,38 @@ import edu.wpi.first.wpilibj.Servo;
  */
 public class RopCRServo extends Servo implements PIDOutput
 {
-//    Servo servo;
-
-    public RopCRServo( int channel, boolean reversed )
+    public RopCRServo( int channel )
     {
         super(channel);
-//        servo = new Servo(channel);
     }
 
     public void pidWrite( double d )
     {
-        System.out.println("pidWrite: " + d);
+//        System.out.println("pidWrite: " + d);
+
+        this.setValue( d );
+    }
+
+    public void set( double value )
+    {
+        this.setValue( value );
+    }
+
+    private void setValue( double speed )
+    {
+        speed *= -1.0;
         
-        if ( d < -0.1)
-            super.set( 0.75 );
-        else if ( d > 0.1 )
-            super.set( 0.25 );
-        else
-            super.set( 0.50 );
+        // Incoming value is -1.0 to 1.0.  Need to translate it for a servo
+        double incoming = speed + 1.0;
+        double motorSpeed = incoming / 2.0;
+
+        if (motorSpeed < 0.0)
+            motorSpeed = 0.0;
+        else if (motorSpeed > 1.0)
+            motorSpeed = 1.0;
+
+//        System.out.println("speed: " + speed + "  incoming: " + incoming + "  motorSpeed: " + motorSpeed);
+
+        super.set( motorSpeed  );
     }
 }

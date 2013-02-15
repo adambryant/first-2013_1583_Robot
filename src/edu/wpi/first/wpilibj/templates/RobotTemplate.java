@@ -7,10 +7,14 @@
 package edu.wpi.first.wpilibj.templates;
 
 import com.rop.control.ClimbSequence;
+import com.rop.control.ResetSequence;
+import com.rop.control.TestSequence;
+import com.rop.control.TestSequence2;
 import com.rop.inputs.Driver;
 import com.rop.mechanism.RobotBody;
 import com.rop.mechanism.Shuttle;
 import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,6 +25,7 @@ import edu.wpi.first.wpilibj.SimpleRobot;
  */
 public class RobotTemplate extends SimpleRobot
 {
+
     RobotBody body;
     Shuttle shuttle;
     Driver driver;
@@ -36,18 +41,8 @@ public class RobotTemplate extends SimpleRobot
 
     protected void disabled()
     {
-        
+        body.disable();
     }
-
-//    public void robotMain()
-//    {
-//        super.robotMain();
-//    }
-
-//    public void startCompetition()
-//    {
-////        super.startCompetition();
-//    }
 
     /**
      * This function is called once each time the robot enters autonomous mode.
@@ -82,27 +77,31 @@ public class RobotTemplate extends SimpleRobot
      */
     public void test()
     {
-        
-        while ( isEnabled() )
-        {
-//            System.out.println("Value: " + accIn.getAcceleration());
-//            System.out.println("Value: " + body.getGyroAngle());
-//            System.out.println("y: " + driver.getY() + "  rot: " + driver.getRot());
-            long y = (long)(driver.getY() * 1000.0);
-            long rot = (long)(driver.getRot() * 1000.0);
-            System.out.println("y: " + y + "  rot: " + rot);
-//            driver.getRawAxis();
-        }
 
-//        ResetSequence reset = new ResetSequence();
-//        reset.doSequence();
+//        while ( isEnabled() )
+//        {
+////            System.out.println("Value: " + accIn.getAcceleration());
+////            System.out.println("Value: " + body.getGyroAngle());
+////            System.out.println("y: " + driver.getY() + "  rot: " + driver.getRot());
+//            long y = (long)(driver.getY() * 1000.0);
+//            long rot = (long)(driver.getRot() * 1000.0);
+//            System.out.println("y: " + y + "  rot: " + rot);
+////            driver.getRawAxis();
+//        }
 
-//        TestSequence test = new TestSequence();
-//        test.doSequence();
+
+//            TestSequence test = new TestSequence();
+//            test.doSequence();
 //
-//        Timer.delay( 10.0 );
+//            Timer.delay( 10.0 );
 //
-//        test = new TestSequence();
-//        test.doSequence();
+//            TestSequence2 test2 = new TestSequence2();
+//            test2.doSequence();
+//
+//            Timer.delay( 10.0 );
+//        }
+
+        ResetSequence reset = new ResetSequence();
+        reset.doSequence();
     }
 }
