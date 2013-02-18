@@ -13,8 +13,8 @@ import com.rop.outputs.motor.RopVictor;
  */
 public class Shuttle
 {
-    static final double UP_SPEED = -0.4;
-    static final double DOWN_SPEED = 0.5;
+    static final double UP_SPEED = -0.2;
+    static final double DOWN_SPEED = 0.3;
 
     private RopVictor motor;
     private LimitSwitch topLimit;

@@ -42,6 +42,10 @@ public class RopCRServo extends Servo implements PIDOutput
             motorSpeed = 0.0;
         else if (motorSpeed > 1.0)
             motorSpeed = 1.0;
+//        if (motorSpeed < -0.3)
+//            motorSpeed = -0.3;
+//        else if (motorSpeed > 0.3)
+//            motorSpeed = 0.3;
 
 //        System.out.println("speed: " + speed + "  incoming: " + incoming + "  motorSpeed: " + motorSpeed);
 
